@@ -1,0 +1,52 @@
+#:kivy 1.0.9
+# The name of the kv file, e.g. pong.kv, must match the name of the app, e.g. PongApp (the part before the App ending)
+
+<PongBall>:
+    size: 50, 50
+    canvas:
+        Ellipse:
+            pos: self.pos
+            size: self.size
+
+<PongPlayer>:
+    size: 25, 200
+    canvas:
+        Rectangle:
+            pos:self.pos
+            size:self.size
+
+<PongGame>: # this is the name of the application class
+    ball: pong_ball # see PongBall ID
+    player1: player_left
+    player2: player_right
+    canvas:
+        Rectangle: # this rectangle defines the horizontal line that seperates left and right player
+            pos: self.center_x - 5, 0 # five pixels left of the center is the x starting point
+            size: 10, self.height # the x-size is 10 pixels, the y-size is the widget-height
+    # The root keyword can be used inside the child block to refer back to the parent/root widget the rule applies to
+    # (PongGame in this case)
+    Label:
+        font_size: 70
+        center_x: root.width / 4
+        top: root.top - 50
+        text: str(root.player1.score)
+
+    Label:
+        font_size: 70
+        center_x: root.width * 3 / 4
+        top: root.top - 50
+        text: str(root.player2.score)
+
+    PongBall:
+        id: pong_ball
+        center: self.parent.center
+
+    PongPlayer:
+        id: player_left
+        x: root.x
+        center_y: root.center_y
+
+    PongPlayer:
+        id: player_right
+        x: root.width - self.width
+        center_y: root.center_y
