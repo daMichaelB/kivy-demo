@@ -7,6 +7,7 @@
         Ellipse:
             pos: self.pos
             size: self.size
+            source: 'res/ball.jpg'
 
 <PongPlayer>:
     size: 25, 200
@@ -19,6 +20,11 @@
     ball: pong_ball # see PongBall ID
     player1: player_left
     player2: player_right
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'res/gras.jpg'
     canvas:
         Rectangle: # this rectangle defines the horizontal line that seperates left and right player
             pos: self.center_x - 5, 0 # five pixels left of the center is the x starting point
